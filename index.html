@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASCN.AI — Профессия будущего</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F5F7F2;
+    --surface: #FFFFFF;
+    --surface2: #EDFAE0;
+    --border: #D6E8C8;
+    --accent: #2df635;
+    --accent-dark: #1ab827;
+    --accent-dim: #e6fde7;
+    --text: #0D1A0E;
+    --muted: #5A7060;
+    --card: #FFFFFF;
+    --shadow: 0 2px 20px rgba(45,246,53,.10);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'Manrope', sans-serif; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 18px 60px;
+    background: rgba(245,247,242,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 4px; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent-dark); }
+  .nav-cta {
+    background: var(--text); color: var(--accent);
+    font-weight: 700; font-size: 13px; letter-spacing: 1px;
+    padding: 10px 24px; border-radius: 6px;
+    text-decoration: none; text-transform: uppercase;
+    transition: background .2s;
+  }
+  .nav-cta:hover { background: var(--accent-dark); color: #fff; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 140px 60px 80px;
+    position: relative; overflow: hidden;
+    background: var(--bg);
+  }
+  .hero-dots {
+    position: absolute; inset: 0; opacity: .35;
+    background-image: radial-gradient(circle, #2df635 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+  .hero-blob {
+    position: absolute; top: -120px; right: -80px;
+    width: 560px; height: 560px; border-radius: 50%;
+    background: radial-gradient(circle, #2df63540 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent-dim); border: 1px solid var(--accent);
+    color: var(--accent-dark); font-size: 12px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 8px 16px; border-radius: 100px;
+    margin-bottom: 32px; width: fit-content;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(64px, 9vw, 136px);
+    line-height: .92; letter-spacing: 2px;
+    margin-bottom: 32px;
+  }
+  .hero h1 .line1 { display: block; color: var(--text); }
+  .hero h1 .line2 { display: block; color: var(--accent-dark); }
+  .hero h1 .line3 { display: block; color: var(--muted); }
+  .hero-desc { font-size: 18px; line-height: 1.7; color: var(--muted); max-width: 520px; margin-bottom: 48px; }
+  .hero-desc strong { color: var(--text); }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--text); color: var(--accent);
+    font-weight: 800; font-size: 15px;
+    padding: 16px 36px; border-radius: 8px;
+    text-decoration: none;
+    transition: transform .2s, box-shadow .2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(0,0,0,.15); }
+  .btn-ghost {
+    border: 2px solid var(--border); color: var(--muted);
+    font-weight: 600; font-size: 15px;
+    padding: 14px 36px; border-radius: 8px;
+    text-decoration: none; transition: border-color .2s, color .2s;
+  }
+  .btn-ghost:hover { border-color: var(--accent-dark); color: var(--accent-dark); }
+  .hero-stats { display: flex; gap: 60px; margin-top: 80px; border-top: 1px solid var(--border); padding-top: 40px; }
+  .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--accent-dark); line-height: 1; }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* SECTION */
+  section { padding: 100px 60px; }
+  .section-label { font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 72px); letter-spacing: 1px; line-height: 1; margin-bottom: 24px; }
+  .section-sub { font-size: 17px; color: var(--muted); max-width: 560px; line-height: 1.7; }
+
+  /* STRIP */
+  .about-strip {
+    background: var(--text);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 60px;
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  }
+  .strip-item { padding: 0 40px; border-right: 1px solid #1e2e1e; }
+  .strip-item:first-child { padding-left: 0; }
+  .strip-item:last-child { border-right: none; }
+  .strip-icon { font-size: 32px; margin-bottom: 16px; }
+  .strip-title { font-weight: 700; font-size: 18px; margin-bottom: 8px; color: #fff; }
+  .strip-text { font-size: 14px; color: #7a9e7e; line-height: 1.7; }
+
+  /* LESSONS */
+  .lessons-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; }
+  .lessons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .lesson-card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 28px;
+    text-decoration: none; color: var(--text);
+    position: relative; overflow: hidden;
+    transition: border-color .25s, box-shadow .25s, transform .2s;
+    display: block;
+  }
+  .lesson-card:hover { border-color: var(--accent-dark); transform: translateY(-4px); box-shadow: 0 8px 32px rgba(45,246,53,.12); }
+  .lesson-card:nth-child(1) { grid-column: span 2; }
+  .lesson-num {
+    font-family: 'Bebas Neue', sans-serif; font-size: 72px; line-height: 1;
+    color: #E8F5E8; position: absolute; right: 20px; top: 12px;
+    transition: color .3s;
+  }
+  .lesson-card:hover .lesson-num { color: #c6f0c8; }
+  .lesson-tag { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 20px; }
+  .lesson-title { font-weight: 800; font-size: 18px; line-height: 1.3; margin-bottom: 10px; }
+  .lesson-desc { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 24px; }
+  .lesson-arrow { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--accent-dark); transition: gap .2s; }
+  .lesson-card:hover .lesson-arrow { gap: 12px; }
+
+  /* INCOME */
+  .income-section { background: var(--surface2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 60px; }
+  .income-list { display: flex; flex-direction: column; gap: 16px; }
+  .income-item {
+    display: flex; align-items: flex-start; gap: 16px;
+    padding: 20px 24px;
+    background: #fff; border: 1.5px solid var(--border); border-radius: 10px;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .income-item:hover { border-color: var(--accent-dark); box-shadow: var(--shadow); }
+  .income-icon { width: 40px; height: 40px; background: var(--accent-dim); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+  .income-title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+  .income-amount { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--accent-dark); letter-spacing: 1px; }
+  .income-visual { background: var(--text); border-radius: 16px; padding: 48px; text-align: center; }
+  .income-big { font-family: 'Bebas Neue', sans-serif; font-size: 110px; line-height: 1; color: var(--accent); }
+  .income-big-label { font-size: 15px; color: #7a9e7e; margin-top: 8px; }
+
+  /* CTA */
+  .cta-section { text-align: center; padding: 120px 60px; background: var(--bg); position: relative; overflow: hidden; }
+  .cta-section .section-title { font-size: clamp(48px, 7vw, 100px); }
+  .cta-section .section-sub { max-width: 480px; margin: 0 auto 40px; }
+
+  /* FOOTER */
+  footer { border-top: 1px solid var(--border); padding: 40px 60px; display: flex; justify-content: space-between; align-items: center; background: var(--surface); }
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 4px; color: var(--muted); }
+  .footer-text { font-size: 13px; color: var(--muted); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  .fade-up { animation: fadeUp .6s ease forwards; }
+  .fade-up:nth-child(2) { animation-delay: .1s; opacity: 0; }
+  .fade-up:nth-child(3) { animation-delay: .2s; opacity: 0; }
+  .fade-up:nth-child(4) { animation-delay: .3s; opacity: 0; }
+
+  @media (max-width: 900px) {
+    nav, .hero, section { padding-left: 20px; padding-right: 20px; }
+    .lessons-grid { grid-template-columns: 1fr; }
+    .lesson-card:nth-child(1) { grid-column: span 1; }
+    .about-strip { grid-template-columns: 1fr; gap: 32px; padding: 40px 20px; }
+    .strip-item { padding: 0 0 28px; border-right: none; border-bottom: 1px solid #1e2e1e; }
+    .strip-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .income-grid { grid-template-columns: 1fr; }
+    .hero-stats { gap: 28px; flex-wrap: wrap; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">ASCN<span>.AI</span></a>
+  <a href="#lessons" class="nav-cta">Начать обучение</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-dots"></div>
+  <div class="hero-blob"></div>
+  <div class="hero-tag">◆ Курс · Профессия будущего</div>
+  <h1>
+    <span class="line1 fade-up">ЗАРАБАТЫВАЙ</span>
+    <span class="line2 fade-up">С ИИ-АГЕНТАМИ</span>
+    <span class="line3 fade-up">ПРЯМО СЕЙЧАС</span>
+  </h1>
+  <p class="hero-desc fade-up"><strong>9 практических уроков</strong> о том, как монетизировать навыки в эпоху ИИ-автоматизации. Никакой воды — только рабочие бизнес-модели на платформе ASCN.</p>
+  <div class="hero-actions fade-up">
+    <a href="#lessons" class="btn-primary">Смотреть программу →</a>
+    <a href="https://ascn.ai" class="btn-ghost" target="_blank">О платформе ASCN</a>
+  </div>
+  <div class="hero-stats">
+    <div><div class="stat-num">9</div><div class="stat-label">Уроков в курсе</div></div>
+    <div><div class="stat-num">∞</div><div class="stat-label">Моделей монетизации</div></div>
+    <div><div class="stat-num">$0</div><div class="stat-label">Стоимость доступа</div></div>
+  </div>
+</section>
+
+<div class="about-strip">
+  <div class="strip-item">
+    <div class="strip-icon">⚡</div>
+    <div class="strip-title">Готовые решения</div>
+    <div class="strip-text">Используй маркетплейс готовых ИИ-агентов и автоматизаций. Не надо разрабатывать с нуля — берёшь и продаёшь.</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon">🔗</div>
+    <div class="strip-title">MCP-интеграции</div>
+    <div class="strip-text">ASCN поддерживает Model Context Protocol — подключай любые сервисы и создавай уникальные продукты для клиентов.</div>
+  </div>
+  <div class="strip-item">
+    <div class="strip-icon">🏷️</div>
+    <div class="strip-title">White-label</div>
+    <div class="strip-text">Запусти собственный бренд на инфраструктуре ASCN. Твой продукт, твои цены, твои клиенты.</div>
+  </div>
+</div>
+
+<section id="lessons" style="background:var(--bg);">
+  <div class="lessons-header">
+    <div>
+      <div class="section-label">Программа курса</div>
+      <h2 class="section-title">9 СПОСОБОВ<br>ЗАРАБОТАТЬ</h2>
+    </div>
+    <p class="section-sub" style="max-width:300px;">От первой продажи до полноценного ИИ-агентства — выбери свой путь.</p>
+  </div>
+
+  <div class="lessons-grid">
+    <a href="lesson-1.html" class="lesson-card">
+      <span class="lesson-num">01</span>
+      <div class="lesson-tag">💰 Маркетплейс</div>
+      <h3 class="lesson-title">Как зарабатывать на готовых решениях в маркетплейсе</h3>
+      <p class="lesson-desc">Выбираешь агента из каталога, настраиваешь под клиента, получаешь комиссию. Минимальный порог входа, максимальный результат.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-2.html" class="lesson-card">
+      <span class="lesson-num">02</span>
+      <div class="lesson-tag">🤝 Партнёрка</div>
+      <h3 class="lesson-title">Реферальная программа: пассивный доход с каждого клиента</h3>
+      <p class="lesson-desc">Приглашаешь пользователей — получаешь процент с их подписок навсегда. Идеально как дополнительный источник дохода.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-3.html" class="lesson-card">
+      <span class="lesson-num">03</span>
+      <div class="lesson-tag">🏢 Агентство</div>
+      <h3 class="lesson-title">Как открыть своё ИИ-агентство с нуля</h3>
+      <p class="lesson-desc">Полная дорожная карта: первый клиент, команда, ценообразование, масштабирование. От фрилансера до владельца агентства.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-4.html" class="lesson-card">
+      <span class="lesson-num">04</span>
+      <div class="lesson-tag">🚀 Бизнес</div>
+      <h3 class="lesson-title">Запусти бизнес на готовом решении из маркетплейса</h3>
+      <p class="lesson-desc">Берёшь готового агента, упаковываешь как продукт для конкретной ниши, продаёшь как SaaS. Без разработки.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-5.html" class="lesson-card">
+      <span class="lesson-num">05</span>
+      <div class="lesson-tag">✍️ Блог / Медиа</div>
+      <h3 class="lesson-title">Монетизируй блог про ИИ-агентов</h3>
+      <p class="lesson-desc">Создаёшь контент — строишь аудиторию — монетизируешь через партнёрку, спонсорство и продажу своих курсов.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-6.html" class="lesson-card">
+      <span class="lesson-num">06</span>
+      <div class="lesson-tag">🔌 MCP-реселлер</div>
+      <h3 class="lesson-title">Перепродавай чужие сервисы через MCP</h3>
+      <p class="lesson-desc">Подключаешь внешние инструменты через MCP-протокол и перепродаёшь клиентам как единый продукт со своей наценкой.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-7.html" class="lesson-card">
+      <span class="lesson-num">07</span>
+      <div class="lesson-tag">🛠️ Под ключ</div>
+      <h3 class="lesson-title">Зарабатывай на сборке автоматизаций под ключ</h3>
+      <p class="lesson-desc">Самая высокомаржинальная модель. Клиент приходит с задачей — ты собираешь решение и получаешь от $500 за проект.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-8.html" class="lesson-card">
+      <span class="lesson-num">08</span>
+      <div class="lesson-tag">🏷️ White-label</div>
+      <h3 class="lesson-title">White-label: свой бренд на платформе ASCN</h3>
+      <p class="lesson-desc">Полная перепродажа платформы под своим брендом. Собственные тарифы, клиентская база и 100% контроль над продуктом.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+    <a href="lesson-9.html" class="lesson-card">
+      <span class="lesson-num">09</span>
+      <div class="lesson-tag">👥 База клиентов</div>
+      <h3 class="lesson-title">Монетизируй свою базу клиентов с ASCN</h3>
+      <p class="lesson-desc">Уже есть аудитория или клиенты? Интегрируй ASCN в своё предложение и получи новый revenue stream без лишних усилий.</p>
+      <span class="lesson-arrow">Читать урок →</span>
+    </a>
+  </div>
+</section>
+
+<section class="income-section">
+  <div class="section-label">Потенциал заработка</div>
+  <h2 class="section-title">СКОЛЬКО МОЖНО<br>ЗАРАБАТЫВАТЬ?</h2>
+  <div class="income-grid">
+    <div class="income-list">
+      <div class="income-item">
+        <div class="income-icon">💰</div>
+        <div><div class="income-title">Маркетплейс + Партнёрка</div><div class="income-amount">$300 — $900 / мес</div></div>
+      </div>
+      <div class="income-item">
+        <div class="income-icon">🏢</div>
+        <div><div class="income-title">ИИ-агентство (5–10 клиентов)</div><div class="income-amount">$1 500 — $5 000 / мес</div></div>
+      </div>
+      <div class="income-item">
+        <div class="income-icon">🛠️</div>
+        <div><div class="income-title">Автоматизации под ключ</div><div class="income-amount">$500 — $2 000 / проект</div></div>
+      </div>
+      <div class="income-item">
+        <div class="income-icon">🏷️</div>
+        <div><div class="income-title">White-label платформа</div><div class="income-amount">от $3 000 / мес</div></div>
+      </div>
+    </div>
+    <div class="income-visual">
+      <div style="font-size:12px;color:#7a9e7e;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;">Совокупный потенциал</div>
+      <div class="income-big">$10K+</div>
+      <div class="income-big-label">в месяц при комбинировании моделей</div>
+      <div style="margin-top:28px;padding-top:28px;border-top:1px solid #1e2e1e;font-size:13px;color:#7a9e7e;line-height:1.7;">
+        Все цифры — реальные кейсы пользователей платформы ASCN. Результат зависит от усилий и выбранной стратегии.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="section-label">Начни сегодня</div>
+  <h2 class="section-title">ТВОЁ ВРЕМЯ —<br><span style="color:var(--accent-dark)">СЕЙЧАС</span></h2>
+  <p class="section-sub">ИИ-агенты — это не будущее. Это то, что продаётся прямо сейчас. Пройди курс бесплатно и выбери свой путь.</p>
+  <a href="#lessons" class="btn-primary" style="font-size:17px;padding:20px 48px;margin:0 auto;">Начать с первого урока →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">ASCN.AI</div>
+  <div class="footer-text">© 2025 ASCN.AI · Профессия будущего</div>
+</footer>
+</body>
+</html>
